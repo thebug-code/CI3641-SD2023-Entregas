@@ -43,15 +43,3 @@ data class Vector(val x: Int, val y: Int, val z: Int) {
     	}
     }
 }
-
-fun main() {
-    var v1 = Vector(-3, -2, 5)
-    val v2 = Vector(6, -10, -1)
-    println(v1 + v2)
-    println(v1 - v2)
-    println(v1 % v2)
-    println(v1 * v2)
-    println(v1 + 5)
-    println(v1 - 5)
-    println(v1 % 5)
-}
