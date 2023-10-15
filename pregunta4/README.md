@@ -6,11 +6,11 @@ Este proyecto implementa una librería en Kotlin para trabajar con vectores trid
 
 El módulo cumple con las siguientes características:
 
-- Suma de vectores: Representada por el símbolo `+`.
-- Resta de vectores: Representada por el símbolo `-`.
-- Producto cruz de vectores: Representada por el símbolo `*`.
-- Producto punto de vectores: Representada por el símbolo `%`.
-- Cálculo de la norma de un vector: Representada por el símbolo `&`.
+- Suma de vectores: representada por el símbolo `+`.
+- Resta de vectores: representada por el símbolo `-`.
+- Producto cruz de vectores: representada por el símbolo `*`.
+- Producto punto de vectores: representada por el símbolo `%`.
+- Cálculo de la norma de un vector: representada por el símbolo `&`.
 
 ## Uso
 
