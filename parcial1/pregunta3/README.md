@@ -23,10 +23,24 @@ El programa cumple con las siguientes características:
 
     - Salir del simulador: `SALIR`
 
-3. Para iniciar el programa, ejecuta el siguiente comando:
+## Uso
+
+Para iniciar el programa, debes seguir estos pasos:
+
+1. Clona este repositorio a tu sistema local:
+
    ```bash
-   python main.py <cantidad_de_bloques>
-   ```
+   git clone git@github.com:thebug-code/CI3641-SD2023-Entregas.git
+
+    ```
+2. Ingresa al directorio del proyecto:
+    ```
+    cd CI3641-SD2023-Entregas/parcial1/pregunta3
+    ```
+3. Para invocar al programa, ejecuta el siguiente comando:
+    ```bash
+    python main.py <cantidad_de_bloques>
+    ```
 
    Donde `<cantidad_de_bloques>` es el número de bloques que deseas admistrar administrar.
 
