@@ -84,4 +84,40 @@ internal class VectorTest {
         val expected = Vector(323.02, 186.02, 276.42)
         assertEquals(expected, (v1 - v2) + (v1 * v2) % v1.norm + v2.norm)
     }
+
+    @Test
+    fun testEqualsForEqualVectors() {
+        val vector1 = Vector(1, 2, 3)
+        val vector2 = Vector(1, 2, 3)
+        assertEquals(true, vector1 == vector2)
+    }
+    
+    @Test
+    fun testEqualsForDifferentVectors() {
+        assertEquals(false, v1 == v2)
+    }
+
+    @Test
+    fun testEqualsForDifferentTypes() {
+        assertEquals(false, v1.equals(5))
+    }
+
+    @Test
+    fun testEqualsForNull() {
+        assertEquals(false, v1.equals(null))
+    }
+
+    @Test
+    fun testEqualsForDiferentVectors2() {
+        val vector1 = Vector(1, 2, 3)
+        val vector2 = Vector(1, 2, 4)
+        assertEquals(false, vector1 == vector2)
+    }
+
+    @Test
+    fun testEqualsForDiferentVectors3() {
+        val vector1 = Vector(1, 2, 3)
+        val vector2 = Vector(1, 3, 3)
+        assertEquals(false, vector1 == vector2)
+    }
 }
