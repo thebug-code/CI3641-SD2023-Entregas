@@ -37,19 +37,18 @@ Para utilizar y probar esta librería, debes seguir estos pasos:
 
 Esto ejecutará las pruebas de la librería y mostrará los resultados.
 
+## Prueba de Cobertura
+
 Para realizar una prueba de cobertura en la librería, sigue estos pasos:
 
 1. Asegúrate de haber seguido los pasos anteriores para compilar el código
 
-2. Ejecuta el script `runCodeCon`:
+2. Ejecuta el script `runCodeCov`:
    ```bash
-   ./runCodeCon
+   ./runCodeCov
    ```
 
 Una vez que la prueba de cobertura se haya completado, puedes ver el informe en la siguiente ubicación:
 ```
 coverage-report/com.threedimvector/Vector.html
 ```
-Abre el archivo Vector.html en tu navegador web.
-
-
