@@ -4,20 +4,23 @@ from math import ceil, floor, log2
 
 
 class Buddy:
-
     def __init__(self, memory_block_num: int):
         # Verifica que la cantidad de bloques de memoria sea un entero positivo
         # y que sea una potencia de dos
         if not isinstance(memory_block_num, int) or memory_block_num < 1:
-            raise ValueError("El numero de bloques de memoria debe ser un entero positivo")
+            raise ValueError(
+                "El numero de bloques de memoria debe ser un entero positivo"
+            )
         elif not (memory_block_num & (memory_block_num - 1) == 0):
-            raise ValueError("El numero de bloques de memoria debe ser una potencia de dos")
+            raise ValueError(
+                "El numero de bloques de memoria debe ser una potencia de dos"
+            )
 
         max_pow_of_two = ceil(log2(memory_block_num))
 
         # Lista de listas de tuplas para trackear los bloques de memoria libres
         block_list = [[] for _ in range(max_pow_of_two + 1)]
-        
+
         # El primer bloque de memoria libre es el bloque completo
         block_list[max_pow_of_two].append((0, memory_block_num - 1))
 
@@ -45,7 +48,9 @@ class Buddy:
                         else:
                             print("Error: El nombre no existe")
                     else:
-                        print("Error: Los parametros no son validos, debe ser LIBERAR <nombre>")
+                        print(
+                            "Error: Los parametros no son validos, debe ser LIBERAR <nombre>"
+                        )
 
                 case "RESERVAR":
                     if len(param) == 3 and param[1].isdigit():
@@ -55,7 +60,9 @@ class Buddy:
                         else:
                             print("Error: El nombre ya existe")
                     else:
-                        print("Error: Los parametros no son validos, debe ser RESERVAR <cantidad> <nombre>")
+                        print(
+                            "Error: Los parametros no son validos, debe ser RESERVAR <cantidad> <nombre>"
+                        )
 
                 case "MOSTRAR":
                     self.display()
@@ -65,7 +72,6 @@ class Buddy:
 
                 case _:
                     print("Error: La accion no es valida")
-
 
     def buddy_alloc(self, cnt: int, name: str):
         # Verifica que cnt sea un entero
@@ -86,7 +92,7 @@ class Buddy:
             return
 
         i = n + 1
-        
+
         # Si no hay un bloque libre del tamaño correcto, busca un bloque mas grande
         while i < len(self.block_list) and len(self.block_list[i]) == 0:
             i += 1
@@ -119,11 +125,14 @@ class Buddy:
 
         self.name_list[name] = block_to_split
 
-
     def buddy_free(self, name: str):
         # Verifica que el nombre exista
         if name not in self.name_list:
-            print("Error: Solicitud de liberacion invalida, el nombre: {} no esta reservado".format(name))
+            print(
+                "Error: Solicitud de liberacion invalida, el nombre: {} no esta reservado".format(
+                    name
+                )
+            )
             return
 
         lb = self.name_list[name][0]
@@ -132,7 +141,7 @@ class Buddy:
 
         # Obtiene la lista que trackea los bloques libres de este tamaño
         list_to_free = int(ceil(log2(block_size)))
-        self.block_list[list_to_free].append((lb, lb + (int(2 ** list_to_free) - 1)))
+        self.block_list[list_to_free].append((lb, lb + (int(2**list_to_free) - 1)))
 
         print("\nBloque {} liberado\n".format(name))
 
@@ -140,29 +149,40 @@ class Buddy:
         buddy_num = lb / block_size
 
         if buddy_num % 2 != 0:
-            buddy_addr = lb - int(2 ** list_to_free)
+            buddy_addr = lb - int(2**list_to_free)
         else:
-            buddy_addr = lb + int(2 ** list_to_free)
-
+            buddy_addr = lb + int(2**list_to_free)
 
         # Busca el buddy en la lista de bloques libres
         i = 0
         while i < len(self.block_list[list_to_free]):
-
             # Si el buddy esta en la lista de bloques libres
             if self.block_list[list_to_free][i][0] == buddy_addr:
-
                 # Buddy esta despues del bloque con esta direccion base
                 if buddy_num % 2 == 0:
                     # Agrega el bloque a la lista de bloques libres
-                    self.block_list[list_to_free + 1].append((lb, lb + (int(2 ** list_to_free) - 1)))
-                    print("Se realizo la fusion de bloques que comienzan en " + str(lb) + " y " + str(buddy_addr) + "\n")
+                    self.block_list[list_to_free + 1].append(
+                        (lb, lb + (int(2**list_to_free) - 1))
+                    )
+                    print(
+                        "Se realizo la fusion de bloques que comienzan en "
+                        + str(lb)
+                        + " y "
+                        + str(buddy_addr)
+                        + "\n"
+                    )
 
                 # Buddy es el bloque antes del bloque con esta direccion base
                 else:
                     # Agrega el bloque a la lista de bloques libres
-                    self.block_list[list_to_free + 1].append((buddy_addr, buddy_addr + 2 * int(2 ** list_to_free) - 1))
-                    print("Se realizo la fusion de bloques que comienzan en {} y {}\n".format(buddy_addr, lb))
+                    self.block_list[list_to_free + 1].append(
+                        (buddy_addr, buddy_addr + 2 * int(2**list_to_free) - 1)
+                    )
+                    print(
+                        "Se realizo la fusion de bloques que comienzan en {} y {}\n".format(
+                            buddy_addr, lb
+                        )
+                    )
 
                 # Elimina el bloque de la lista de bloques libres
                 self.block_list[list_to_free].pop(i)
