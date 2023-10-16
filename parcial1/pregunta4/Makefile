@@ -12,4 +12,4 @@ VectorTestKt.class: VectorTest.kt
 	$(KC) $(KFLAG) .:$(LIB)/kotlin-test-1.9.20-RC.jar:$(LIB)/kotlin-test-junit-1.9.20-RC.jar:$(LIB)/junit-4.13.2.jar VectorTest.kt -d .
 
 clean:
-	rm -rf *.class META-INF
+	rm -rf *.class META-INF com coverage-report
