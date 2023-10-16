@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo java -javaagent:lib/jacocoagent.jar=includes=com/threedimvector/* -cp .:lib/* org.junit.runner.JUnitCore VectorTest
+sudo java -jar lib/jacococli.jar report jacoco.exec --classfiles com/threedimvector --html ./coverage-report
+
