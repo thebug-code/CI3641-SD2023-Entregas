@@ -28,24 +28,26 @@ El programa cumple con las siguientes características:
    python main.py <cantidad_de_bloques>
    ```
 
-   Donde `<cantidad_de_bloques>` es el número de bloques de memoria a administrar.
+   Donde `<cantidad_de_bloques>` es el número de bloques que deseas admistrar administrar.
 
 ## Ejecución de Pruebas
 
-Para ejecutar las pruebas unitarias, se utiliza el siguiente comando:
+Para ejecutar las pruebas unitarias, utiliza el siguiente comando:
 ```bash
 python -m unittest test_buddy.py
 ```
-Además, se puede medir la cobertura de las pruebas utilizando la biblioteca `coverage` de Python. Siguiendo estos pasos:
+Además, puedes medir la cobertura de las pruebas utilizando la biblioteca `coverage` de Python. Sigue estos pasos:
 
-1. pip install -r requirements.txt
+1. Instala las dependencias:
+    ```bash
+    pip install -r requirements.txt
+    ```
 2. Ejecuta las pruebas con cobertura:
     ```bash
     coverage run -m unittest test_buddy.py
     ```
-3. Generar el informe de cobertura:
+3. Genera el informe de cobertura:
     ```bash
     coverage report
     ```
-Esto proporciona información sobre la cobertura de las pruebas.
-
+Esto te proporcionará información sobre la cobertura de las pruebas.
