@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo java -javaagent:lib/jacocoagent.jar=includes=com/programsimulator/* -cp .:lib/* org.junit.runner.JUnitCore ProgramTest
+sudo java -jar lib/jacococli.jar report jacoco.exec --classfiles com/programsimulator --html ./coverage-report
+
