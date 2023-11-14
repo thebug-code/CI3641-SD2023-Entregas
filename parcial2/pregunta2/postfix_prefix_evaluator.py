@@ -1,5 +1,6 @@
 # Evaluador de expresiones prefijas y postfijas
 
+
 class PrefixPostfixEvaluator:
     def __init__(self):
         self.stack = []
@@ -30,7 +31,7 @@ class PrefixPostfixEvaluator:
                 break
             else:
                 print("Opción inválida")
-    
+
     def prefix_evaluator(self, exp):
         self.stack = []
         for c in exp[::-1]:
@@ -51,7 +52,6 @@ class PrefixPostfixEvaluator:
             raise Exception("Expresión inválida")
 
         return self.stack.pop()
-    
 
     def postfix_evaluator(self, exp: [str]) -> int:
         self.stack = []
@@ -79,7 +79,7 @@ class PrefixPostfixEvaluator:
         operatorUsed = []
 
         for c in exp[::-1]:
-            if c == '+' or c == '-':
+            if c == "+" or c == "-":
                 try:
                     r = self.stack.pop()
                     l = self.stack.pop()
@@ -89,7 +89,7 @@ class PrefixPostfixEvaluator:
 
                 self.stack.append(r + c + l)
                 operatorUsed.append(c)
-            elif c == '*' or c == '/':
+            elif c == "*" or c == "/":
                 try:
                     r = self.correct_expression(self.stack.pop(), operatorUsed.pop())
                     l = self.correct_expression(self.stack.pop(), operatorUsed.pop())
@@ -101,14 +101,14 @@ class PrefixPostfixEvaluator:
             else:
                 self.stack.append(c)
                 operatorUsed.append(None)
-        
+
         if len(self.stack) > 1:
             # Demasiados operandos
             raise Exception("Expresión inválida")
 
         return self.stack.pop()
-    
-    #class Expression:
+
+    # class Expression:
     #    def __init__(self, expression, operatorUsed):
     #        self.expression = expression
     #        self.operatorUsed = operatorUsed
@@ -118,7 +118,7 @@ class PrefixPostfixEvaluator:
         operatorUsed = []
 
         for c in exp:
-            if c == '+' or c == '-':
+            if c == "+" or c == "-":
                 try:
                     r = self.stack.pop()
                     l = self.stack.pop()
@@ -128,7 +128,7 @@ class PrefixPostfixEvaluator:
 
                 self.stack.append(l + c + r)
                 operatorUsed.append(c)
-            elif c == '*' or c == '/':
+            elif c == "*" or c == "/":
                 try:
                     r = self.correct_expression(self.stack.pop(), operatorUsed.pop())
                     l = self.correct_expression(self.stack.pop(), operatorUsed.pop())
@@ -147,7 +147,7 @@ class PrefixPostfixEvaluator:
 
         return self.stack.pop()
 
-        #for c in exp:
+        # for c in exp:
         #    if c == '+' or c == '-':
         #        r = self.stack.pop().expression
         #        l = self.stack.pop().expression
@@ -160,27 +160,26 @@ class PrefixPostfixEvaluator:
         #    else:
         #        self.stack.append(self.Expression(c, None))
 
-        #return self.stack.pop().expression
+        # return self.stack.pop().expression
 
     def correct_expression(self, exp, operatorUsed):
-        if operatorUsed == '+' or operatorUsed == '-':
-            return '(' + exp + ')'
+        if operatorUsed == "+" or operatorUsed == "-":
+            return "(" + exp + ")"
         return exp
 
-    #def correct_expression(self, exp):
+    # def correct_expression(self, exp):
     #    if exp.operatorUsed == '+' or exp.operatorUsed == '-':
     #        return '(' + exp.expression + ')'
     #    return exp.expression
 
-
     def eval(self, op1: int, op2: int, operator: str) -> int:
-        if operator == '*':
+        if operator == "*":
             return op1 * op2
-        elif operator == '/':
+        elif operator == "/":
             return op1 / op2
-        elif operator == '+':
+        elif operator == "+":
             return op1 + op2
-        elif operator == '-':
+        elif operator == "-":
             return op1 - op2
         else:
             raise Exception("Operador inválido")
