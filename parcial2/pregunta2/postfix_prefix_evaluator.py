@@ -35,7 +35,7 @@ class PrefixPostfixEvaluator:
     def prefix_evaluator(self, exp):
         self.stack = []
         for c in exp[::-1]:
-            if c.isdigit():
+            if c.lstrip("-").isdigit():
                 self.stack.append(int(c))
             else:
                 try:
@@ -56,7 +56,7 @@ class PrefixPostfixEvaluator:
     def postfix_evaluator(self, exp: [str]) -> int:
         self.stack = []
         for c in exp:
-            if c.isdigit():
+            if c.lstrip("-").isdigit():
                 self.stack.append(int(c))
             else:
                 try:
@@ -176,7 +176,7 @@ class PrefixPostfixEvaluator:
         if operator == "*":
             return op1 * op2
         elif operator == "/":
-            return op1 / op2
+            return op1 // op2
         elif operator == "+":
             return op1 + op2
         elif operator == "-":
