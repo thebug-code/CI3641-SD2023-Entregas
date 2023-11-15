@@ -11,16 +11,16 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
 
 ### Acciones Disponibles:
 
-- EVAL <orden> <expr>:
+- `EVAL <orden> <expr>`:
 
-Representa una evaluación de la expresión en <expr> de acuerdo con el orden especificado (<orden>).
-<orden> puede ser "PRE" para expresiones en orden pre-fijo o "POST" para expresiones en orden post-fijo.
+Representa una evaluación de la expresión eni `<expr>` de acuerdo con el orden especificado (`<orden>`).
+`<orden>` puede ser "PRE" para expresiones en orden pre-fijo o "POST" para expresiones en orden post-fijo.
 
 #### Ejemplos:
 1. EVAL PRE + * + 3 4 5 7 deberá imprimir 42.
 2. EVAL POST 8 3 - 8 4 4 + * + deberá imprimir 69.
 
-- MOSTRAR <orden> <expr>:
+- `MOSTRAR <orden> <expr>`:
 
 Representa una impresión en orden in-fijo de la expresión en <expr> de acuerdo con el orden especificado (<orden>).
 La expresión resultante sigue las reglas de precedencia y asociatividad estándar.
@@ -29,7 +29,7 @@ La expresión resultante sigue las reglas de precedencia y asociatividad estánd
 1. MOSTRAR PRE + * + 3 4 5 7 deberá imprimir (3 + 4) * 5 + 7.
 2. MOSTRAR POST 8 3 - 8 4 4 + * + deberá imprimir 8 - 3 + 8 * (4 + 4).
 
-- SALIR:
+- `SALIR`:
 
 Permite salir del programa.
 
@@ -43,12 +43,12 @@ Permite salir del programa.
 Clona este repositorio:
 
 ```
-git clone https://github.com/tu-usuario/calculadora-expresiones.git
+git clone git@github.com:thebug-code/CI3641-SD2023-Entregas.git
 ```
 Navega al directorio del proyecto:
 
 ```
-cd calculadora-expresiones
+cd CI3641-SD2023-Entregas/tree/main/parcial2/pregunta2
 ```
 
 Crea y activa un entorno virtual:
@@ -66,7 +66,7 @@ pip install -r requirements.txt
 Ejecuta el programa:
 
 ```
-python calculadora.py
+python postfix_prefix_evaluator.py
 ```
 
 Para ejecutar la prueba de cobertura, utiliza el siguiente comando:
