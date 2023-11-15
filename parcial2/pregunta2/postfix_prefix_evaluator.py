@@ -6,12 +6,16 @@ class PrefixPostfixEvaluator:
         self.stack = []
 
     def run_program(self):
-        print("Bienvenido al evaluador de expresiones prefijas y postfijas")
+        #print("Bienvenido al evaluador de expresiones prefijas y postfijas")
 
         while True:
             option = input("Ingrese una opción: ")
             params = option.split(" ")
             fst_param = params[0].upper()
+
+            if len(params[2:]) == 0 and fst_param != "SALIR":
+                print("Opcion invalida")
+                continue
 
             if fst_param == "EVAL":
                 if params[1].upper() == "PRE":
@@ -19,18 +23,18 @@ class PrefixPostfixEvaluator:
                 elif params[1].upper() == "POST":
                     print(self.postfix_evaluator(params[2:]))
                 else:
-                    print("Opción inválida")
+                    print("Opcion invalida")
             elif fst_param == "MOSTRAR":
                 if params[1].upper() == "POST":
                     print(self.postfix_to_infix(params[2:]))
                 elif params[1].upper() == "PRE":
                     print(self.prefix_to_infix(params[2:]))
                 else:
-                    print("Opción inválida")
+                    print("Opcion invalida")
             elif fst_param == "SALIR":
                 break
             else:
-                print("Opción inválida")
+                print("Opcion invalida")
 
     def prefix_evaluator(self, exp):
         self.stack = []
@@ -81,23 +85,24 @@ class PrefixPostfixEvaluator:
         for c in exp[::-1]:
             if c == "+" or c == "-":
                 try:
-                    r = self.stack.pop()
                     l = self.stack.pop()
+                    r = self.stack.pop()
                 except:
                     # Demasiados operadores
                     raise Exception("Expresión inválida")
 
-                self.stack.append(r + c + l)
+                self.stack.append(l + c + r)
                 operatorUsed.append(c)
             elif c == "*" or c == "/":
                 try:
-                    r = self.correct_expression(self.stack.pop(), operatorUsed.pop())
                     l = self.correct_expression(self.stack.pop(), operatorUsed.pop())
+                    r = self.correct_expression(self.stack.pop(), operatorUsed.pop())
                 except:
                     # Demasiados operadores
                     raise Exception("Expresión inválida")
 
-                self.stack.append(r + c + l)
+                self.stack.append(l + c + r)
+                operatorUsed.append(c)
             else:
                 self.stack.append(c)
                 operatorUsed.append(None)
@@ -137,6 +142,7 @@ class PrefixPostfixEvaluator:
                     raise Exception("Expresión inválida")
 
                 self.stack.append(l + c + r)
+                operatorUsed.append(c)
             else:
                 self.stack.append(c)
                 operatorUsed.append(None)
