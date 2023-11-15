@@ -13,7 +13,7 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
 
 - `EVAL <orden> <expr>`:
 
-Representa una evaluación de la expresión eni `<expr>` de acuerdo con el orden especificado (`<orden>`).
+Representa una evaluación de la expresión `<expr>` de acuerdo con el orden especificado (`<orden>`).
 `<orden>` puede ser "PRE" para expresiones en orden pre-fijo o "POST" para expresiones en orden post-fijo.
 
 #### Ejemplos:
@@ -22,7 +22,7 @@ Representa una evaluación de la expresión eni `<expr>` de acuerdo con el orden
 
 - `MOSTRAR <orden> <expr>`:
 
-Representa una impresión en orden in-fijo de la expresión en <expr> de acuerdo con el orden especificado (<orden>).
+Representa una impresión en orden in-fijo de la expresión `<expr>` de acuerdo con el orden especificado (`<orden>`).
 La expresión resultante sigue las reglas de precedencia y asociatividad estándar.
 
 #### Ejemplos:
