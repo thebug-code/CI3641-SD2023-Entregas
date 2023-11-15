@@ -29,3 +29,8 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+
+# Executables
+*.exe
+*.out
+*.app
