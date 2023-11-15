@@ -66,7 +66,6 @@ class TestCalculator(unittest.TestCase):
     def test_add_add_three_four_substract_four_three_prefix(self):
         self.aider(8, "+ + 3 4 - 4 3", False)
 
-
     # ============= Postfix =============
     def test_add_three_four_postfix(self):
         self.aider(7, "3 4 +")
@@ -127,8 +126,8 @@ class TestCalculator(unittest.TestCase):
 
     def test_add_add_three_four_substract_four_three_postfix(self):
         self.aider(8, "3 4 + 4 3 - +")
-    
-    # ============= Show prefix expression to infix ============= 
+
+    # ============= Show prefix expression to infix =============
     def test_show_prefix_expression(self):
         calc = PrefixPostfixEvaluator()
         self.assertEqual("3+4", calc.prefix_to_infix("+ 3 4".split()))
@@ -203,7 +202,9 @@ class TestCalculator(unittest.TestCase):
 
     def test_show_prefix_expression_19(self):
         calc = PrefixPostfixEvaluator()
-        self.assertEqual("2*2*2*2/16", calc.prefix_to_infix("/ * * * 2 2 2 2 16".split()))
+        self.assertEqual(
+            "2*2*2*2/16", calc.prefix_to_infix("/ * * * 2 2 2 2 16".split())
+        )
 
     def test_show_prefix_expression_20(self):
         calc = PrefixPostfixEvaluator()
@@ -245,7 +246,7 @@ class TestCalculator(unittest.TestCase):
     def test_show_postfix_expression_9(self):
         calc = PrefixPostfixEvaluator()
         self.assertEqual("12/3", calc.postfix_to_infix("12 3 /".split()))
-    
+
     def test_show_postfix_expression_10(self):
         calc = PrefixPostfixEvaluator()
         self.assertEqual("-12/3", calc.postfix_to_infix("-12 3 /".split()))
@@ -265,7 +266,7 @@ class TestCalculator(unittest.TestCase):
     def test_show_postfix_expression_14(self):
         calc = PrefixPostfixEvaluator()
         self.assertEqual("4+4/4", calc.postfix_to_infix("4 4 4 / +".split()))
-    
+
     def test_show_postfix_expression_15(self):
         calc = PrefixPostfixEvaluator()
         self.assertEqual("4+3+4+3", calc.postfix_to_infix("4 3 + 4 + 3 +".split()))
@@ -280,22 +281,28 @@ class TestCalculator(unittest.TestCase):
 
     def test_show_postfix_expression_18(self):
         calc = PrefixPostfixEvaluator()
-        self.assertEqual("4+3+4+3+4", calc.postfix_to_infix("4 3 + 4 + 3 + 4 +".split()))
+        self.assertEqual(
+            "4+3+4+3+4", calc.postfix_to_infix("4 3 + 4 + 3 + 4 +".split())
+        )
 
     def test_show_postfix_expression_19(self):
         calc = PrefixPostfixEvaluator()
-        self.assertEqual("2*2*2*2/16", calc.postfix_to_infix("2 2 * 2 * 2 * 16 /".split()))
-    
+        self.assertEqual(
+            "2*2*2*2/16", calc.postfix_to_infix("2 2 * 2 * 2 * 16 /".split())
+        )
+
     def test_show_postfix_expression_20(self):
         calc = PrefixPostfixEvaluator()
-        self.assertEqual("3+4+4-4-3", calc.postfix_to_infix("3 4 + 4 + 4 - 3 -".split()))
+        self.assertEqual(
+            "3+4+4-4-3", calc.postfix_to_infix("3 4 + 4 + 4 - 3 -".split())
+        )
 
     # ============= Invalid expressions =============
     def test_invalid_expression(self):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
             calc.postfix_evaluator("3 4 + +".split())
-    
+
     def test_invalid_expression_2(self):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
@@ -305,12 +312,12 @@ class TestCalculator(unittest.TestCase):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
             calc.postfix_evaluator("-12 / 3".split())
-    
+
     def test_invalid_expression_4(self):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
             calc.postfix_evaluator("3 4 + 4 + 4".split())
-    
+
     def test_invalid_expression_5(self):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
@@ -325,7 +332,7 @@ class TestCalculator(unittest.TestCase):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
             calc.prefix_evaluator("+ 4 4 4 4".split())
-    
+
     def test_invalid_expression_8(self):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
@@ -340,7 +347,6 @@ class TestCalculator(unittest.TestCase):
         calc = PrefixPostfixEvaluator()
         with self.assertRaises(Exception):
             calc.prefix_evaluator("/ * 12 3".split())
-
 
     def test_run_simulation(self):
         calc = PrefixPostfixEvaluator()
@@ -358,8 +364,9 @@ class TestCalculator(unittest.TestCase):
             "SALE",
         ]
 
-        with patch('builtins.input', side_effect=invalid_input_test_cases + ['SALIR']), \
-            patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+        with patch(
+            "builtins.input", side_effect=invalid_input_test_cases + ["SALIR"]
+        ), patch("sys.stdout", new_callable=StringIO) as mock_stdout:
             calc.run_program()
             output = mock_stdout.getvalue().strip()
             error_count = output.count("Opcion invalida")
@@ -367,13 +374,14 @@ class TestCalculator(unittest.TestCase):
 
     def aider(self, expected, expression, postfix=True):
         calc = PrefixPostfixEvaluator()
-        
+
         if postfix:
             actual = calc.postfix_evaluator(expression.split())
         else:
             actual = calc.prefix_evaluator(expression.split())
 
         self.assertEqual(expected, actual)
+
 
 def run_tests():
     """
@@ -383,5 +391,5 @@ def run_tests():
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_tests()
