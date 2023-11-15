@@ -13,25 +13,25 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
 
 - `EVAL <orden> <expr>`:
 
-Representa una evaluación de la expresión `<expr>` de acuerdo con el orden especificado (`<orden>`).
-`<orden>` puede ser "PRE" para expresiones en orden pre-fijo o "POST" para expresiones en orden post-fijo.
-
-#### Ejemplos:
-1. EVAL PRE + * + 3 4 5 7 deberá imprimir 42.
-2. EVAL POST 8 3 - 8 4 4 + * + deberá imprimir 69.
+    Representa una evaluación de la expresión `<expr>` de acuerdo con el orden especificado (`<orden>`).
+    `<orden>` puede ser "PRE" para expresiones en orden pre-fijo o "POST" para expresiones en orden post-fijo.
+    
+    #### Ejemplos:
+    1. EVAL PRE + * + 3 4 5 7 deberá imprimir 42.
+    2. EVAL POST 8 3 - 8 4 4 + * + deberá imprimir 69.
 
 - `MOSTRAR <orden> <expr>`:
 
-Representa una impresión en orden in-fijo de la expresión `<expr>` de acuerdo con el orden especificado (`<orden>`).
-La expresión resultante sigue las reglas de precedencia y asociatividad estándar.
-
-#### Ejemplos:
-1. MOSTRAR PRE + * + 3 4 5 7 deberá imprimir (3 + 4) * 5 + 7.
-2. MOSTRAR POST 8 3 - 8 4 4 + * + deberá imprimir 8 - 3 + 8 * (4 + 4).
+    Representa una impresión en orden in-fijo de la expresión `<expr>` de acuerdo con el orden especificado (`<orden>`).
+    La expresión resultante sigue las reglas de precedencia y asociatividad estándar.
+    
+    #### Ejemplos:
+    1. MOSTRAR PRE + * + 3 4 5 7 deberá imprimir (3 + 4) * 5 + 7.
+    2. MOSTRAR POST 8 3 - 8 4 4 + * + deberá imprimir 8 - 3 + 8 * (4 + 4).
 
 - `SALIR`:
 
-Permite salir del programa.
+    Permite salir del programa.
 
 ### Reglas de Precedencia y Asociatividad
 - La suma y la resta tienen la misma precedencia.
