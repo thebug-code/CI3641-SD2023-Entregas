@@ -89,4 +89,4 @@ Para ejecutar el programa y visualizar los tiempos, se requiere una versión esp
     ./a.out
     ```
 
-¡Listo! Ahora deberías poder ejecutar y visualizar los tiempos de ejecución del algoritmo de Fibonacci generalizado en sus distintas versiones. Si encuentras algún problema, asegúrate de seguir los pasos detallados y verifica la configuración de tu entorno. ¡Buena suerte! 🙂
+¡Listo! Ahora deberías poder ejecutar el programa. Si encuentras algún problema, asegúrate de seguir los pasos detallados y verifica la configuración de tu entorno. ¡Buena suerte! :blush:
