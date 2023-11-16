@@ -11,7 +11,11 @@ using namespace std::chrono;
 // X = 5, Y = 3, Z = 6
 // alpha = 6, beta = 7
 
-// recursive
+/*
+ * Fibonacci generalizado recursivo con parametros alpha = 6, beta = 7 
+ * @param n: numero a calcular
+ * @return: el n-esimo numero de la secuencia
+ */
 int f67_recursive(int n) {
     if (n >= 0 && n < 42) {
         return n;
@@ -23,7 +27,13 @@ int f67_recursive(int n) {
     }
 }
 
-// tail recursion
+
+/*
+ * Fibonacci generalizado con recursion de cola con parametros alpha = 6, beta = 7
+ * @param n: numero a calcular
+ * @param a, b, c, d, e, f: valores iniciales de la secuencia
+ * @return: el n-esimo numero de la secuencia
+ */
 int f67_tail_recursion(int n, int a, int b, int c, int d, int e, int f) {
     if (n >= 0 && n < 42) {
         return n;
@@ -36,25 +46,42 @@ int f67_tail_recursion(int n, int a, int b, int c, int d, int e, int f) {
     }
 }
 
+
+/*
+ * Fibonacci generalizado con recursion de cola con parametros alpha = 6, beta = 7
+ * @param n: numero a calcular
+ * @return: el n-esimo numero de la secuencia
+ */
 int f67_tail_recursion_aux(int n) {
     int i = n % 7;
     return f67_tail_recursion(n, i, i + 7, i + 14, i  + 21, i + 28, i + 35);
 }
 
-// iterative
+
+/*
+ * Fibonacci generalizado iterativo con parametros alpha = 6, beta = 7
+ * @param n: numero a calcular
+ * @return: el n-esimo numero de la secuencia
+ */
 int f67_iterative(int n) {
+    // Casos base
     if (n >= 0 && n < 42) {
         return n;
     }
 
+    // Calculo de los primeros 6 numeros de la secuencia
     int i = n % 7;
     int a = i, b = i + 7, c = i + 14, d = i + 21, e = i + 28, f = i + 35;
 
+    // Calculo del n-esimo numero de la secuencia
     while (n > 42) {
+        // Caso base
         if (n >= 0 && n < 42) {
             return n;
         }
 
+        // Calculo de los siguientes 6 numeros de la secuencia
+        // y el n-esimo numero de la secuencia
         int temp = a + b + c + d + e + f;
         a = b;
         b = c;
@@ -72,6 +99,7 @@ int f67_iterative(int n) {
 
     return a + b + c + d + e + f;
 }
+
 
 int main() {
     vector<long> t1, t2, t3;
