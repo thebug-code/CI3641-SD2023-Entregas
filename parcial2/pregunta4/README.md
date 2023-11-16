@@ -68,6 +68,11 @@ Para ejecutar el programa y visualizar los tiempos, se requiere una versión esp
     pip install -r requirements.txt
     ```
 
+    Agregue la ruta lib de python2.6 a la variable de entorno `$LD_LIBRARY_PATH`
+    ```
+    export LD_LIBRARY_PATH="/home/{user}/.pyenv/versions/3.6.0/lib"
+    ```
+
 4. Configuración de la variable PYTHONPATH
     Configure la variable PYTHONPATH como se muestra a continuación, reemplazando {USER} con el nombre de usuario de su máquina:
     
