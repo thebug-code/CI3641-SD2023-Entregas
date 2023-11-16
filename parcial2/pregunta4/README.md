@@ -1,4 +1,4 @@
-# Algoritmo de fibonacci generalizado
+# Fibonacci generalizado
 Este proyecto implementa el algoritmo de Fibonacci generalizado (de cola, recursivo e iterativo) con parámetros `alpha=6` y `beta=7` y proporciona una visualización de los tiempos de ejecución utilizando Matplotlib para C++.
 
 ## Requisitos previos
@@ -74,7 +74,7 @@ Para ejecutar el programa y visualizar los tiempos, se requiere una versión esp
     ```
 
 4. Configuración de la variable PYTHONPATH
-    Configure la variable PYTHONPATH como se muestra a continuación, reemplazando {USER} con el nombre de usuario de su máquina:
+    Configure la variable `$PYTHONPATH` como se muestra a continuación, reemplazando {USER} con el nombre de usuario de su máquina:
     
     ```
     export PYTHONPATH="/home/{user}/.pyenv/versions/3.6.0/envs/py2/lib/python3.6/site-packages"
