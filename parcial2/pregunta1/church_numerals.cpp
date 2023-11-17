@@ -1,47 +1,50 @@
-// Church numerals
-
 #include <iostream>
 using namespace std;
 
-// Constructor para representar el cero
-auto Cero = [](auto) {
-    return [](auto x) {
-        return x;
-    };
+struct ChurchNumeral {
+    virtual int value() const = 0;
+    virtual ChurchNumeral* clone() const = 0;
+    virtual ChurchNumeral* add(const ChurchNumeral& other) const = 0;
+    virtual ChurchNumeral* multiply(const ChurchNumeral& other) const = 0;
 };
 
-// Constructor para representar el sucesor
-auto Suc(auto a) {
-    return [=](auto f) {
-        return [=](auto x) {
-            return f(a(f)(x));
-        };
-    };
+
+struct Zero : public ChurchNumeral {
+    int value() const override { return 0; }
+    ChurchNumeral* clone() const override { return new Zero(); }
+    ChurchNumeral* add(const ChurchNumeral& other) const override { return other.clone(); }
+    ChurchNumeral* multiply(const ChurchNumeral& other) const override { return new Zero(); }
 };
 
-// Constructor para representar la suma
-auto Sum(auto a, auto b) {
-    return [=](auto f) {
-        return [=](auto x) {
-            return a(f)(b(f)(x));
-        };
-    };
+struct Succ : public ChurchNumeral {
+    const ChurchNumeral* predecessor;
+
+    Succ(const ChurchNumeral* predecessor) : predecessor(predecessor) {}
+
+    int value() const override { return predecessor->value() + 1; }
+    ChurchNumeral* clone() const override { return new Succ(predecessor->clone()); }
+    ChurchNumeral* add(const ChurchNumeral& other) const override { return new Succ(predecessor->add(other)); }
+    ChurchNumeral* multiply(const ChurchNumeral& other) const override { return predecessor->multiply(other)->add(other); }
 };
 
-// Constructor para representar la multiplicación
-auto Mul(auto a, auto b) {
-    return [=](auto f) {
-        return a(b(f));
-    };
-};
 
 int main() {
-    // Representación del número 3
-    auto tres = Suc(Suc(Suc(Cero)));
+    ChurchNumeral* zero = new Zero();
+    ChurchNumeral* one = new Succ(zero);
+    ChurchNumeral* two = new Succ(one);
+    ChurchNumeral* three = new Succ(two);
 
-    // Representación del número 4
-    auto cuatro = Suc(tres);
-
-    cout << "3 + 4 = " << Sum(tres, cuatro)([](auto x) { return x + 1; })(0) << endl;
-    cout << "3 * 4 = " << Mul(tres, cuatro)([](auto x) { return x + 1; })(0) << endl;
+    cout << three->value() << endl;
+    cout << one->value() << endl;
+    cout << two->value() << endl;
+    cout << three->value() << endl;
+    
+    cout << three->add(*zero)->value() << endl; // Output: 3
+    cout << three->add(*two)->value() << endl; // Output: 5
+    cout << three->multiply(*two)->value() << endl; // Output: 6
+    
+    delete zero;
+    delete one;
+    delete two;
+    delete three;
 }
