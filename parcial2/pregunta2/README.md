@@ -38,7 +38,7 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
        ```
     2. ```console
        foo@bar:~$ MOSTRAR POST 8 3 - 8 4 4 + * +
-       8 - 3 + 8 * (4 + 4).
+       8 - 3 + 8 * (4 + 4)
        ```
 
 - `SALIR`:
@@ -54,42 +54,41 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
 ## Uso
 Clona este repositorio:
 
-```
+```bash
 git clone git@github.com:thebug-code/CI3641-SD2023-Entregas.git
 ```
 Navega al directorio del proyecto:
 
-```
+```bash
 cd CI3641-SD2023-Entregas/tree/main/parcial2/pregunta2
 ```
 
 Crea y activa un entorno virtual:
 
-```
+```bash
 python -m venv venv
 source venv/bin/activate  # Para sistemas basados en Unix/Linux
 ```
 Instala las dependencias:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 Ejecuta el programa:
 
-```
+```bash
 python postfix_prefix_evaluator.py
 ```
 
 Para ejecutar la prueba de cobertura, utiliza el siguiente comando:
 
-```
+```bash
 coverage run -m unittest test_evaluator
 ```
 
 Para ver el reporte de cobertura en la consola, ejecuta:
 
-```
+```bash
 coverage report
 ```
-
