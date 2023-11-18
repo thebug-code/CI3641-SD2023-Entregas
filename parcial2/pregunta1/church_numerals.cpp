@@ -1,14 +1,18 @@
 #include <iostream>
 using namespace std;
 
+// Structura que representa un numero de Church
 struct ChurchNumeral {
     virtual int value() const = 0;
     virtual ChurchNumeral* clone() const = 0;
+
+    // Operaciones
     virtual ChurchNumeral* add(const ChurchNumeral& other) const = 0;
     virtual ChurchNumeral* multiply(const ChurchNumeral& other) const = 0;
 };
 
 
+// Estructura que representa el numero 0
 struct Zero : public ChurchNumeral {
     int value() const override { return 0; }
     ChurchNumeral* clone() const override { return new Zero(); }
@@ -16,6 +20,7 @@ struct Zero : public ChurchNumeral {
     ChurchNumeral* multiply(const ChurchNumeral& other) const override { return new Zero(); }
 };
 
+// Estructura que representa el numero n + 1
 struct Succ : public ChurchNumeral {
     const ChurchNumeral* predecessor;
 
@@ -28,6 +33,7 @@ struct Succ : public ChurchNumeral {
 };
 
 
+// Main
 int main() {
     ChurchNumeral* zero = new Zero();
     ChurchNumeral* one = new Succ(zero);
