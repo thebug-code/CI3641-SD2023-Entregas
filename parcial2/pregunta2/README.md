@@ -17,8 +17,14 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
     `<orden>` puede ser "PRE" para expresiones en orden pre-fijo o "POST" para expresiones en orden post-fijo.
     
     #### Ejemplos:
-    1. EVAL PRE + * + 3 4 5 7 deberá imprimir 42.
-    2. EVAL POST 8 3 - 8 4 4 + * + deberá imprimir 69.
+    1. ```console
+       foo@bar:~$ EVAL PRE + * + 3 4 5 7
+       42
+       ```
+    2. ```
+       foo@bar:~$ EVAL POST 8 3 - 8 4 4 + * +
+       69
+       ```
 
 - `MOSTRAR <orden> <expr>`:
 
@@ -26,8 +32,14 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
     La expresión resultante sigue las reglas de precedencia y asociatividad estándar.
     
     #### Ejemplos:
-    1. MOSTRAR PRE + * + 3 4 5 7 deberá imprimir (3 + 4) * 5 + 7.
-    2. MOSTRAR POST 8 3 - 8 4 4 + * + deberá imprimir 8 - 3 + 8 * (4 + 4).
+    1. ```console
+       foo@bar:~$ MOSTRAR PRE + * + 3 4 5 7
+       (3 + 4) * 5 + 7
+       ```
+    2. ```console
+       foo@bar:~$ MOSTRAR POST 8 3 - 8 4 4 + * +
+       8 - 3 + 8 * (4 + 4).
+       ```
 
 - `SALIR`:
 
