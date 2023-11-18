@@ -1,3 +1,6 @@
+import sys
+import ast
+
 # Conjuntos de partes crecientes de un conjunto
 
 def sublists_crecientes(p):
@@ -22,6 +25,11 @@ def es_creciente(p):
     else:
         return p[0] < p[1] and es_creciente(p[1:])
 
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python3 sublists_crecientes.py <list>")
+        sys.exit(1)
 
-for x in sublists_crecientes([1,4,3,2,5]):
-    print(x)
+    l = ast.literal_eval(sys.argv[1])
+    for x in sublists_crecientes(l):
+        print(x)
