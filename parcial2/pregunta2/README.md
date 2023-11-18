@@ -21,7 +21,7 @@ Calculadora de expresiones aritméticas sobre enteros que puede manejar tanto ex
        foo@bar:~$ EVAL PRE + * + 3 4 5 7
        42
        ```
-    2. ```
+    2. ```console
        foo@bar:~$ EVAL POST 8 3 - 8 4 4 + * +
        69
        ```
