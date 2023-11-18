@@ -16,7 +16,7 @@ using namespace std::chrono;
  * @param n: numero a calcular
  * @return: el n-esimo numero de la secuencia
  */
-int f67_recursive(int n) {
+long long int f67_recursive(int n) {
     if (n >= 0 && n < 42) {
         return n;
     } else if (n >= 42) {
@@ -34,7 +34,7 @@ int f67_recursive(int n) {
  * @param a, b, c, d, e, f: valores iniciales de la secuencia
  * @return: el n-esimo numero de la secuencia
  */
-int f67_tail_recursion(int n, int a, int b, int c, int d, int e, int f) {
+long long int f67_tail_recursion(int n, int a, int b, int c, int d, int e, int f) {
     if (n >= 0 && n < 42) {
         return n;
     } else if (0 <= n - 7 && n - 7 < 42) {
@@ -52,7 +52,7 @@ int f67_tail_recursion(int n, int a, int b, int c, int d, int e, int f) {
  * @param n: numero a calcular
  * @return: el n-esimo numero de la secuencia
  */
-int f67_tail_recursion_aux(int n) {
+long long int f67_tail_recursion_aux(int n) {
     int i = n % 7;
     return f67_tail_recursion(n, i, i + 7, i + 14, i  + 21, i + 28, i + 35);
 }
@@ -63,7 +63,7 @@ int f67_tail_recursion_aux(int n) {
  * @param n: numero a calcular
  * @return: el n-esimo numero de la secuencia
  */
-int f67_iterative(int n) {
+long long int f67_iterative(int n) {
     // Casos base
     if (n >= 0 && n < 42) {
         return n;
@@ -102,10 +102,10 @@ int f67_iterative(int n) {
 
 
 int main() {
-    vector<long> t1, t2, t3;
+    vector<long long int> t1, t2, t3;
     vector<int> ns;
 
-    for (int i = 10; i < 250; i += 10) {
+    for (int i = 0; i <= 150; i += 1) {
         // f67_recursive
         auto start = high_resolution_clock::now();
         f67_recursive(i);
@@ -132,6 +132,7 @@ int main() {
     }
 
     // Grafica los tiempos
+    plt::figure_size(600, 400);
     plt::named_plot("f67_recursive", ns, t1, "r-");
     plt::named_plot("f67_tail_recursion", ns, t2, "g-");
     plt::named_plot("f67_iterative", ns, t3, "b-");
@@ -140,7 +141,72 @@ int main() {
     plt::xlabel("n");
     plt::ylabel("t (microseconds)");
     plt::legend();
+    plt::save("./f67.png");
     plt::show();
+
+    // Max time
+    auto max_time_t1 = *max_element(t1.begin(), t1.end());
+    auto max_time_t2 = *max_element(t2.begin(), t2.end());
+    auto max_time_t3 = *max_element(t3.begin(), t3.end());
+
+    cout << "max time of f67_recursive: " << max_time_t1 << " microseconds" << endl;
+    cout << "max time of f67_tail_recursion: " << max_time_t2 << " microseconds" << endl;
+    cout << "max time of f67_iterative: " << max_time_t3 << " microseconds" << endl;
+
+    // Search ns for max time
+    int index = distance(t1.begin(), max_element(t1.begin(), t1.end()));
+    cout << "ns = " << ns[index] << endl;
+
+    //// tail recursion vs iterative
+    t2.clear();
+    t3.clear();
+    ns.clear();
+    for (int i = 2000; i <= 80000; i += 1000) {
+        // f67_tail_recursion
+        auto start = high_resolution_clock::now();
+        f67_tail_recursion_aux(i);
+        auto stop = high_resolution_clock::now();
+        auto d2 = duration_cast<microseconds>(stop - start);
+        t2.push_back(d2.count());
+
+        // f67_iterative
+        start = high_resolution_clock::now();
+        f67_iterative(i);
+        stop = high_resolution_clock::now();
+        auto d3 = duration_cast<microseconds>(stop - start);
+        t3.push_back(d3.count());
+
+        if (i == 200) {
+            cout << f67_iterative(i) << endl;
+        }
+
+        // Agrega los tiempos a un vector
+        ns.push_back(i);
+    }
+    
+    // Grafica los tiempos
+    plt::figure_size(600, 400);
+    plt::named_plot("f67_tail_recursion", ns, t2, "g-");
+    plt::named_plot("f67_iterative", ns, t3, "b-");
+
+    plt::title("f67");
+    plt::xlabel("n");
+    plt::ylabel("t (microseconds)");
+    plt::legend();
+    plt::save("./f67_2.png");
+    plt::show();
+
+    // Max time
+    max_time_t2 = *max_element(t2.begin(), t2.end());
+    max_time_t3 = *max_element(t3.begin(), t3.end());
+
+    cout << endl;
+    cout << "max time of f67_tail_recursion: " << max_time_t2 << " microseconds" << endl;
+    cout << "max time of f67_iterative: " << max_time_t3 << " microseconds" << endl;
+
+    // Search ns for max time
+    index = distance(t2.begin(), max_element(t2.begin(), t2.end()));
+    cout << "ns = " << ns[index] << endl;
 
     return 0;
 }
