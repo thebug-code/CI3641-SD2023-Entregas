@@ -14,7 +14,11 @@ class Tree {
         vector<T> tree_preorder;
         vector<T> tree_postorder;
 
-        // New node
+        /*
+         * Crea un nuevo nodo
+         * @param data: Dato del nodo
+         * @return Tree<T> *: Nodo creado
+         */
         Tree<T> *newNode(T data) {
             Tree<T> *node = new Tree<T>;
             node->data = data;
@@ -23,7 +27,10 @@ class Tree {
             return node;
         }
 
-        // Traverse preorder
+        /*
+         * Recorre el arbol en preorden y almacena los datos en un vector
+         * @param root: Raiz del arbol
+         */
         void preorder(Tree<T> *root) {
             if (root == NULL) return;
             
@@ -32,7 +39,10 @@ class Tree {
             preorder(root->right);
         }
         
-        // Traverse postorder
+        /*
+         * Recorre el arbol en postorden y almacena los datos en un vector
+         * @param root: Raiz del arbol
+         */
         void postorder(Tree<T> *root) {
             if (root == NULL) return;
         
@@ -41,7 +51,11 @@ class Tree {
             tree_postorder.push_back(root->data);
         }
         
-        // Check if tree is max heap
+        /*
+         * Verifica si el arbol es un max heap
+         * @param root: Raiz del arbol
+         * @return bool: True si es un max heap, False si no lo es
+         */
         bool isMaxHeap(Tree<T> *root) {
             if (root == NULL) {
                 return true;
@@ -54,7 +68,11 @@ class Tree {
             return isMaxHeap(root->left) && isMaxHeap(root->right);
         }
 
-        // Check if tree if max heap symmetric
+        /*
+         * Verifica si el arbol es un max heap simetrico
+         * @param root: Raiz del arbol
+         * @return bool: True si es un max heap simetrico, False si no lo es
+         */
         bool isMaxHeapSymmetric(Tree<T> *root) {
             preorder(root);
             postorder(root);
@@ -62,6 +80,7 @@ class Tree {
         }
 };
 
+// Main
 int main() {
     class Tree<int> tree;
 
