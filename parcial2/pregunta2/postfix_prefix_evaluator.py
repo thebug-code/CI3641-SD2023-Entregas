@@ -113,10 +113,6 @@ class PrefixPostfixEvaluator:
 
         return self.stack.pop()
 
-    # class Expression:
-    #    def __init__(self, expression, operatorUsed):
-    #        self.expression = expression
-    #        self.operatorUsed = operatorUsed
 
     def postfix_to_infix(self, exp: [str]) -> [str]:
         self.stack = []
@@ -153,30 +149,12 @@ class PrefixPostfixEvaluator:
 
         return self.stack.pop()
 
-        # for c in exp:
-        #    if c == '+' or c == '-':
-        #        r = self.stack.pop().expression
-        #        l = self.stack.pop().expression
-        #        self.stack.append(self.Expression(l + c + r, c))
-        #    elif c == '*' or c == '/':
-        #        r = self.correct_expression(self.stack.pop())
-        #        l = self.correct_expression(self.stack.pop())
-        #        self.stack.append(self.Expression(l + c + r, c))
-
-        #    else:
-        #        self.stack.append(self.Expression(c, None))
-
-        # return self.stack.pop().expression
 
     def correct_expression(self, exp, operatorUsed):
         if operatorUsed == "+" or operatorUsed == "-":
             return "(" + exp + ")"
         return exp
 
-    # def correct_expression(self, exp):
-    #    if exp.operatorUsed == '+' or exp.operatorUsed == '-':
-    #        return '(' + exp.expression + ')'
-    #    return exp.expression
 
     def eval(self, op1: int, op2: int, operator: str) -> int:
         if operator == "*":
