@@ -85,7 +85,7 @@ Para ejecutar el programa y visualizar los tiempos, se requiere una versión esp
     Compile el programa:
     
     ```
-    g++ function_family.cpp -std=c++11 -I/home/{user}/.pyenv/versions/3.6.0/include/python3.6m -I/home/{user}/.pyenv/versions/py2/lib/python3.6/site-packages/numpy/core/include -L/home/{user}/.pyenv/versions/3.6.0/lib -lpython3.6m
+    g++ f_six_seven.cpp -std=c++11 -I/home/{user}/.pyenv/versions/3.6.0/include/python3.6m -I/home/{user}/.pyenv/versions/py2/lib/python3.6/site-packages/numpy/core/include -L/home/{user}/.pyenv/versions/3.6.0/lib -lpython3.6m
     ```
 
     Ejecute el programa:
