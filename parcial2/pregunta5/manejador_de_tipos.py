@@ -73,8 +73,12 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.atomics[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.atomics[nombre_tipo].representacion
                 else:
-                    wasted_bytes += unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
-                    unpackaging_tamanio += unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    wasted_bytes += (
+                        unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    )
+                    unpackaging_tamanio += (
+                        unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    )
                     unpackaging_tamanio += self.atomics[nombre_tipo].representacion
 
             elif nombre_tipo in self.structs:
@@ -84,8 +88,12 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.structs[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.structs[nombre_tipo].tamanio
                 else:
-                    wasted_bytes += unpackaging_tamanio % self.structs[nombre_tipo].alineacion
-                    unpackaging_tamanio += unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    wasted_bytes += (
+                        unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    )
+                    unpackaging_tamanio += (
+                        unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    )
                     unpackaging_tamanio += self.structs[nombre_tipo].tamanio
 
             elif nombre_tipo in self.unions:
@@ -95,15 +103,25 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.unions[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.unions[nombre_tipo].tamanio
                 else:
-                    wasted_bytes += unpackaging_tamanio % self.unions[nombre_tipo].alineacion
-                    unpackaging_tamanio += unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    wasted_bytes += (
+                        unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    )
+                    unpackaging_tamanio += (
+                        unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    )
                     unpackaging_tamanio += self.unions[nombre_tipo].tamanio
 
             else:
                 print("Error: El nombre del tipo no existe.")
                 return
 
-        self.structs[nombre] = self.Struct(nombre, tipos, [unpackaging_tamanio, packaging_tamanio], [max_align, 1], wasted_bytes)
+        self.structs[nombre] = self.Struct(
+            nombre,
+            tipos,
+            [unpackaging_tamanio, packaging_tamanio],
+            [max_align, 1],
+            wasted_bytes,
+        )
         print("Tipo struct creado exitosamente.")
 
     def crear_union(self, nombre, tipos):
