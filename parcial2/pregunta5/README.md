@@ -31,3 +31,5 @@ python main
 ```
 
 ¡Disfruta del simulador de manejador de tipos de datos xD!
+
+NOTA: No me dio tiempo implementar las pruebas unitarias :(
