@@ -67,20 +67,15 @@ class ManejadorDeTipos:
 
         for nombre_tipo in tipos:
             if nombre_tipo in self.atomics:
-                packaging_tamanio += self.atomics[nombre_tipo].representation
-                packaging_tamanio += self.atomics[nombre_tipo].alineacion
+                packaging_tamanio += self.atomics[nombre_tipo].representacion
                 if self.atomics[nombre_tipo].alineacion > max_align:
                     max_align = self.atomics[nombre_tipo].alineacion
                 if unpackaging_tamanio % self.atomics[nombre_tipo].alineacion == 0:
-                    unpackaging_tamanio += self.atomics[nombre_tipo].representation
+                    unpackaging_tamanio += self.atomics[nombre_tipo].representacion
                 else:
-                    wasted_bytes += (
-                        unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
-                    )
-                    unpackaging_tamanio += (
-                        unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
-                    )
-                    unpackaging_tamanio += self.atomics[nombre_tipo].representation
+                    wasted_bytes += unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    unpackaging_tamanio += unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    unpackaging_tamanio += self.atomics[nombre_tipo].representacion
 
             elif nombre_tipo in self.structs:
                 packaging_tamanio += self.structs[nombre_tipo].tamanio
@@ -89,12 +84,8 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.structs[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.structs[nombre_tipo].tamanio
                 else:
-                    wasted_bytes += (
-                        unpackaging_tamanio % self.structs[nombre_tipo].alineacion
-                    )
-                    unpackaging_tamanio += (
-                        unpackaging_tamanio % self.structs[nombre_tipo].alineacion
-                    )
+                    wasted_bytes += unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    unpackaging_tamanio += unpackaging_tamanio % self.structs[nombre_tipo].alineacion
                     unpackaging_tamanio += self.structs[nombre_tipo].tamanio
 
             elif nombre_tipo in self.unions:
@@ -104,25 +95,15 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.unions[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.unions[nombre_tipo].tamanio
                 else:
-                    wasted_bytes += (
-                        unpackaging_tamanio % self.unions[nombre_tipo].alineacion
-                    )
-                    unpackaging_tamanio += (
-                        unpackaging_tamanio % self.unions[nombre_tipo].alineacion
-                    )
+                    wasted_bytes += unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    unpackaging_tamanio += unpackaging_tamanio % self.unions[nombre_tipo].alineacion
                     unpackaging_tamanio += self.unions[nombre_tipo].tamanio
 
             else:
                 print("Error: El nombre del tipo no existe.")
                 return
 
-        self.structs[nombre] = self.Struct(
-            nombre,
-            tipos,
-            [unpackaging_tamanio, packaging_tamanio],
-            [max_align, 1],
-            wasted_bytes,
-        )
+        self.structs[nombre] = self.Struct(nombre, tipos, [unpackaging_tamanio, packaging_tamanio], [max_align, 1], wasted_bytes)
         print("Tipo struct creado exitosamente.")
 
     def crear_union(self, nombre, tipos):
@@ -133,8 +114,8 @@ class ManejadorDeTipos:
         max_align = 0
         for nombre_tipo in tipos:
             if nombre_tipo in self.atomics:
-                if self.atomics[nombre_tipo].representation > max_tamanio:
-                    max_tamanio = self.atomics[nombre_tipo].representation
+                if self.atomics[nombre_tipo].representacion > max_tamanio:
+                    max_tamanio = self.atomics[nombre_tipo].representacion
                     max_align = self.atomics[nombre_tipo].alineacion
             elif nombre_tipo in self.structs:
                 if self.structs[nombre_tipo].tamanio[1] > max_tamanio:
@@ -162,19 +143,19 @@ class ManejadorDeTipos:
             print("Error: El nombre del tipo no existe.")
 
     class Atomic:
-        def __init__(self, nombre: str, representation: int, alineacion: int):
+        def __init__(self, nombre: str, representacion: int, alineacion: int):
             self.nombre = nombre
-            self.representation = representation
+            self.representacion = representacion
             self.alineacion = alineacion
 
         def describe(self):
             str_to_prt = ""
             str_to_prt += "Nombre: " + self.nombre + "\n"
-            str_to_prt += "Tamanio: " + str(self.representation) + "\n"
+            str_to_prt += "Tamanio: " + str(self.representacion) + "\n"
             str_to_prt += "Alineacion: " + str(self.alineacion) + "\n"
             str_to_prt += (
                 "Bytes desperdiciados: "
-                + str(self.representation % self.alineacion)
+                + str(self.representacion % self.alineacion)
                 + "\n"
             )
             return str_to_prt
