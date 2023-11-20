@@ -15,7 +15,9 @@ class ManejadorDeTipos:
                     print("Error: Numero de parametros invalido.")
                     continue
                 if not param[1].isdigit() or not param[2].isdigit():
-                    print("Error: <representacion> y <alineacion> deben ser enteros positivos.")
+                    print(
+                        "Error: <representacion> y <alineacion> deben ser enteros positivos."
+                    )
                     continue
                 self.crear_atomico(param[0], int(param[1]), int(param[2]))
 
@@ -72,8 +74,12 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.atomics[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.atomics[nombre_tipo].representation
                 else:
-                    wasted_bytes += unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
-                    unpackaging_tamanio += unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    wasted_bytes += (
+                        unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    )
+                    unpackaging_tamanio += (
+                        unpackaging_tamanio % self.atomics[nombre_tipo].alineacion
+                    )
                     unpackaging_tamanio += self.atomics[nombre_tipo].representation
 
             elif nombre_tipo in self.structs:
@@ -83,8 +89,12 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.structs[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.structs[nombre_tipo].tamanio
                 else:
-                    wasted_bytes += unpackaging_tamanio % self.structs[nombre_tipo].alineacion
-                    unpackaging_tamanio += unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    wasted_bytes += (
+                        unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    )
+                    unpackaging_tamanio += (
+                        unpackaging_tamanio % self.structs[nombre_tipo].alineacion
+                    )
                     unpackaging_tamanio += self.structs[nombre_tipo].tamanio
 
             elif nombre_tipo in self.unions:
@@ -94,15 +104,25 @@ class ManejadorDeTipos:
                 if unpackaging_tamanio % self.unions[nombre_tipo].alineacion == 0:
                     unpackaging_tamanio += self.unions[nombre_tipo].tamanio
                 else:
-                    wasted_bytes += unpackaging_tamanio % self.unions[nombre_tipo].alineacion
-                    unpackaging_tamanio += unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    wasted_bytes += (
+                        unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    )
+                    unpackaging_tamanio += (
+                        unpackaging_tamanio % self.unions[nombre_tipo].alineacion
+                    )
                     unpackaging_tamanio += self.unions[nombre_tipo].tamanio
 
             else:
                 print("Error: El nombre del tipo no existe.")
                 return
 
-        self.structs[nombre] = self.Struct(nombre, tipos, [unpackaging_tamanio, packaging_tamanio], [max_align, 1], wasted_bytes)
+        self.structs[nombre] = self.Struct(
+            nombre,
+            tipos,
+            [unpackaging_tamanio, packaging_tamanio],
+            [max_align, 1],
+            wasted_bytes,
+        )
         print("Tipo struct creado exitosamente.")
 
     def crear_union(self, nombre, tipos):
@@ -142,7 +162,6 @@ class ManejadorDeTipos:
             print("Error: El nombre del tipo no existe.")
 
     class Atomic:
-
         def __init__(self, nombre: str, representation: int, alineacion: int):
             self.nombre = nombre
             self.representation = representation
@@ -153,11 +172,14 @@ class ManejadorDeTipos:
             str_to_prt += "Nombre: " + self.nombre + "\n"
             str_to_prt += "Tamanio: " + str(self.representation) + "\n"
             str_to_prt += "Alineacion: " + str(self.alineacion) + "\n"
-            str_to_prt += "Bytes desperdiciados: " + str(self.representation % self.alineacion) + "\n"
+            str_to_prt += (
+                "Bytes desperdiciados: "
+                + str(self.representation % self.alineacion)
+                + "\n"
+            )
             return str_to_prt
 
     class Union:
-
         def __init__(self, nombre: str, tipos: list, tamanio: int, alineacion: int):
             self.nombre = nombre
             self.tipos = tipos
@@ -165,17 +187,25 @@ class ManejadorDeTipos:
             self.alineacion = alineacion
 
         def describe(self):
-
             str_to_prt = ""
             str_to_prt += "Nombre: " + self.nombre + "\n"
             str_to_prt += "Tamanio: " + str(self.tamanio) + "\n"
             str_to_prt += "Alineacion: " + str(self.alineacion) + "\n"
-            str_to_prt += "Bytes desperdiciados: " + str(self.tamanio % self.alineacion) + "\n"
+            str_to_prt += (
+                "Bytes desperdiciados: " + str(self.tamanio % self.alineacion) + "\n"
+            )
 
             return str_to_prt
-    class Struct:
 
-        def __init__(self, nombre: str, tipos: list, tamanio: list, alineacion: list, wasted_bytes: int):
+    class Struct:
+        def __init__(
+            self,
+            nombre: str,
+            tipos: list,
+            tamanio: list,
+            alineacion: list,
+            wasted_bytes: int,
+        ):
             self.nombre = nombre
             self.tipos = tipos
             self.tamanio = tamanio
@@ -184,13 +214,25 @@ class ManejadorDeTipos:
 
         def describe(self):
             str_to_prt = ""
-            str_to_prt += "Nombre: " + self.nombre + "\n" \
-                        + "UnPackaging\n" \
-                        + "     Tamanio: " + str(self.tamanio[0]) + "\n" \
-                        + "     Alineacion: " + str(self.alineacion[0]) + "\n" \
-                        + "     Bytes desperdiciados: " + str(self.wasted_bytes) + "\n" \
-                        + "Packaging\n" \
-                        + "     Tamanio: " + str(self.tamanio[1]) + "\n" \
-                        + "     Alineacion: 1\n" \
-                        + "     Bytes desperdiciados: 0\n"
+            str_to_prt += (
+                "Nombre: "
+                + self.nombre
+                + "\n"
+                + "UnPackaging\n"
+                + "     Tamanio: "
+                + str(self.tamanio[0])
+                + "\n"
+                + "     Alineacion: "
+                + str(self.alineacion[0])
+                + "\n"
+                + "     Bytes desperdiciados: "
+                + str(self.wasted_bytes)
+                + "\n"
+                + "Packaging\n"
+                + "     Tamanio: "
+                + str(self.tamanio[1])
+                + "\n"
+                + "     Alineacion: 1\n"
+                + "     Bytes desperdiciados: 0\n"
+            )
             return str_to_prt
