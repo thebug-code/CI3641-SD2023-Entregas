@@ -15,5 +15,6 @@ class Secuencia(ABC, Generic[T]):
     def remover(self) -> T:
         pass
 
+    @abstractmethod
     def vacio(self) -> bool:
         pass
