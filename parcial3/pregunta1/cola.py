@@ -1,15 +1,15 @@
 from secuencia import Secuencia
 from secuencia import T
 
-class Pila(Secuencia[T]):
+class Cola(Secuencia[T]):
     def __init__(self):
         super().__init__()
 
     def agregar(self, elemento: T):
         self._secuencia.append(elemento)
 
-    def remover(self) -> T:
-        return self._secuencia.pop()
+    def remover(self):
+        return self._secuencia.pop(0)
 
     def vacio(self):
         return len(self._secuencia) == 0
