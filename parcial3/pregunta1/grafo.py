@@ -12,6 +12,7 @@
 # •  Para BFS el orden de selección de nodos es a amplitud (usando un cola).
 
 from collections import defaultdict
+from abc import ABC, abstractmethod
 
 # Grafo dirigido usando lista de adyacencia
 
@@ -22,6 +23,16 @@ class Grafo:
 
     def agregar_arista(self, origen: int, destino: int):
         self.adj_list[origen].append(destino)
+
+
+# Clase abstracta Busqueda
+class Busqueda(ABC):
+    def __init__(self, grafo: Grafo):
+        self.grafo = grafo
+
+    @abstractmethod
+    def buscar(self, D: int, H: int) -> int:
+        pass
 
 
 
