@@ -13,6 +13,8 @@
 
 from collections import defaultdict
 from abc import ABC, abstractmethod
+from pila import Pila
+from cola import Cola
 
 # Grafo dirigido usando lista de adyacencia
 
@@ -34,6 +36,39 @@ class Busqueda(ABC):
     def buscar(self, D: int, H: int) -> int:
         pass
 
+# DFS para hallar camino entre dos nodos
+class DFS(Busqueda):
+    def __init__(self, grafo: Grafo):
+        super().__init__(grafo)
 
+    def buscar(self, D: int, H: int) -> int:
+        visitados = [False] * self.grafo.nodos
+        pila = Pila[int]()
+        pila.agregar(D)
+        visitados[D] = True
+        contador = 0
 
+        while not pila.vacio():
+            nodo = pila.remover()
+            visitados[nodo] = True
+            
+            if nodo == H:
+                return contador
 
+            for adyacente in self.grafo.adj_list[nodo]:
+                if not visitados[adyacente]:
+                    visitados[adyacente] = True
+                    pila.agregar(adyacente)
+            contador += 1
+        
+        return -1
+
+g = Grafo(5)
+g.agregar_arista(0, 1)
+g.agregar_arista(0, 2)
+g.agregar_arista(2, 1)
+g.agregar_arista(0, 3)
+g.agregar_arista(1, 4)
+
+dfs = DFS(g)
+print(dfs.buscar(0, 4))
