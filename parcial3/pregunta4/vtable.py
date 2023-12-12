@@ -7,6 +7,35 @@ class VTable:
         self.vtables = {}      # { "clase" : { "metodo" : "clase que lo define" } }
         self.inherit_hier = {} # { "clase" : "clase base" }
 
+    def run_simulation(self):
+        while True:
+            # Pide al usuario una accion (SE ASUME QUE EL USUARIO INGRESA UNA
+            # ACCION VALIDA)
+            action = input("Ingrese una accion: ")
+            params = action.split(" ")
+
+            if params[0].lower() == "class":
+                # Verifica que el <tipo> es una expresion de 
+                # la forma <nombre> : <superclase>
+                if ':' in params:
+                    class_base = params[3]
+                    methods = params[4:]
+                else:
+                    class_base = None
+                    methods = params[2:]
+
+                class_derived = params[1]
+                
+                # Agrega la clase
+                self.add(class_base, class_derived, methods)
+            elif params[0].lower() == "describir":
+                # Imprime la tabla de metodos virtuales de la clase
+                # dada
+                # TODO: falta darle formato
+                print(self.vtables[params[1]])
+            elif params[0].lower() == "salir":
+                break
+
     def add(self, class_base, class_derived, methods):
         # Verica que la clase base exista (si aplica)
         if class_base != None and class_base not in self.vtables.keys():
@@ -46,43 +75,20 @@ class VTable:
                 # Continua con la clase base
                 curr_class = self.inherit_hier[curr_class]
 
-
-        # Copia los metodos 
-        #if class_base != None:
-        #    for method in methods:
-        #        # Verifica si el metodo existe en la clase base y en la clase
-        #        # de la que se hereda (si aplica)
-        #        curr_class = class_base
-        #        found = False
-        #        while curr_class != None:
-        #            if method not in self.vtables[curr_class].keys():
-        #                # curr_class no define el metodo, se continua con su
-        #                # clase base
-        #                curr_class = self.inherit_hier[curr_class]
-        #            else:
-        #                # curr_class define el metodo, se agrega a la tabla
-        #                # de metodos virtuales
-        #                self.vtables[class_derived][method] = curr_class
-        #                found = True
-        #                break
-
-        #        if not found:
-        #            # La clase derivada es la primera en definir el metodo
-        #            self.vtables[class_derived][method] = class_derived
-        #else:
-        #    # La clase derivada es la clase base
-        #    for method in methods:
-        #        self.vtables[class_derived][method] = class_derived
-
         print(f"La tabla de metodos virtuales de {class_derived} fue creada con exito")
 
-# Ejejmplo
-vtable = VTable()
-vtable.add(None, "A", ["foo", "baz"])
-vtable.add("A", "B", ["foo"])
-vtable.add("B", "C", ["bar"])
 
-print(vtable.vtables)
+# Ejejmplo
+#vtable = VTable()
+#vtable.add(None, "A", ["foo", "baz"])
+#vtable.add("A", "B", ["foo"])
+#vtable.add("B", "C", ["bar"])
+#
+#print(vtable.vtables)
+
+if __name__ == "__main__":
+    vtable = VTable()
+    vtable.run_simulation()
 
 
 
