@@ -47,7 +47,7 @@ Ejemplos:
     SALIR
     ```
 
-## Ejecutar Pruebas con Cobertura
+## Pruebas
 
 El proyecto incluye un conjunto de pruebas para verificar el correcto funcionamiento del manejador. Para ejecutarlas, use el siguiente comando:
     ```bash
