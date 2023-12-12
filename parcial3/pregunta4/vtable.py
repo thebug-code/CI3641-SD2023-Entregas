@@ -94,14 +94,6 @@ class VTable:
             print(f" {method} -> {class_def} :: {method}")
 
 
-# Ejejmplo
-# vtable = VTable()
-# vtable.add(None, "A", ["foo", "baz"])
-# vtable.add("A", "B", ["foo"])
-# vtable.add("B", "C", ["bar"])
-#
-# print(vtable.vtables)
-
 if __name__ == "__main__":
     vtable = VTable()
     vtable.run_simulation()
