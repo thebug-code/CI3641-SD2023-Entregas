@@ -1,5 +1,5 @@
 # Producto punto entre dos arreglos
-Dado dos argumentos pasados por la línea de comandos, digamos, `N` y `T`. El programa calcula el producto escalar entre dos vectores generados aleatoriamente de `N` elementos enteros. El cálculo se realiza usando `T` hilos; cada hilo calcula un producto escalar parcial y luego estos se suman para obtener el resultado final, el cual se muestra en pantalla.
+Dado dos argumentos pasados por la línea de comandos, digamos, `N` y `T`. El programa calcula el producto escalar entre dos vectores generados aleatoriamente de `N` elementos enteros cada uno. El cálculo se realiza usando `T` hilos; cada hilo calcula un producto escalar parcial y luego estos se suman para obtener el resultado final, el cual se muestra en pantalla.
 
 ## Instalación
 1. Clona el repositorio:
@@ -16,11 +16,13 @@ Dado dos argumentos pasados por la línea de comandos, digamos, `N` y `T`. El pr
 
 ## Uso
 Una vez ubicado en el directorio, puedes compilar el programa con el siguiente comando:
+
     ```bash
     make
     ```
 
-Para ejecutar el programa, utilice el siguiente comando
+Para ejecutar el programa, utilice el siguiente comando:
+
     ```bash
     ./dotproduct <N> <num-threads>
     ```
