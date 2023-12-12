@@ -16,15 +16,13 @@ Dado dos argumentos pasados por la línea de comandos, digamos, `N` y `T`. El pr
 
 ## Uso
 Una vez ubicado en el directorio, puedes compilar el programa con el siguiente comando:
-
-    ```bash
-    make
-    ```
+```bash
+make
+```
 
 Para ejecutar el programa, utilice el siguiente comando:
+```bash
+./dotproduct <N> <num-threads>
+```
 
-    ```bash
-    ./dotproduct <N> <num-threads>
-    ```
-
-Donde `N` es el número de elementos del arreglo y `num-threads` es el números de hilos para el calculo del producto.
+Donde `N` es el número de elementos del arreglo y `num-threads` es el número de hilos para el calculo del producto.
