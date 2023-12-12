@@ -27,12 +27,19 @@ class VTable:
                 class_derived = params[1]
                 
                 # Agrega la clase
-                self.add(class_base, class_derived, methods)
+                try:
+                    self.add(class_base, class_derived, methods)
+                except Exception as e:
+                    print(f"Error: {e}")
+
             elif params[0].lower() == "describir":
                 # Imprime la tabla de metodos virtuales de la clase
                 # dada
-                # TODO: falta darle formato
-                print(self.vtables[params[1]])
+                try:
+                    self.describe(params[1])
+                except Exception as e:
+                    print(f"Error: {e}")
+
             elif params[0].lower() == "salir":
                 break
 
@@ -41,13 +48,13 @@ class VTable:
         if class_base != None and class_base not in self.vtables.keys():
             raise Exception("La clase base no existe")
         
+        # Verifica que la clase derivada no sea la clase base
+        if class_base == class_derived:
+            raise Exception("La clase derivada y la clase base son la misma")
+
         # Verifica que la clase derivada no exista
         if class_derived in self.vtables.keys():
             raise Exception("La clase derivada ya existe")
-
-        # Verifica que la clase derivada no sea la clase base
-        if class_base == class_derived:
-            raise Exception("La clase derivada no puede ser la clase base")
 
         # Verifica que todos los metodos dados son distintos
         if len(methods) != len(set(methods)):
@@ -76,6 +83,13 @@ class VTable:
                 curr_class = self.inherit_hier[curr_class]
 
         print(f"La tabla de metodos virtuales de {class_derived} fue creada con exito")
+
+    def describe(self, class_name):
+        if class_name not in self.vtables.keys():
+            raise Exception("La clase no existe")
+        
+        for (method, class_def) in self.vtables[class_name].items():
+            print(f" {method} -> {class_def} :: {method}")
 
 
 # Ejejmplo
