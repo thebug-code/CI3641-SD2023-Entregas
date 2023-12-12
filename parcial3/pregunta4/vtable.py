@@ -2,10 +2,11 @@
 # para un sistema orientado a objetos con herencia simple
 # y despacho dinamico de metodos
 
+
 class VTable:
     def __init__(self):
-        self.vtables = {}      # { "clase" : { "metodo" : "clase que lo define" } }
-        self.inherit_hier = {} # { "clase" : "clase base" }
+        self.vtables = {}  # { "clase" : { "metodo" : "clase que lo define" } }
+        self.inherit_hier = {}  # { "clase" : "clase base" }
 
     def run_simulation(self):
         while True:
@@ -15,9 +16,9 @@ class VTable:
             params = action.split(" ")
 
             if params[0].lower() == "class":
-                # Verifica que el <tipo> es una expresion de 
+                # Verifica que el <tipo> es una expresion de
                 # la forma <nombre> : <superclase>
-                if ':' in params:
+                if ":" in params:
                     class_base = params[3]
                     methods = params[4:]
                 else:
@@ -25,7 +26,7 @@ class VTable:
                     methods = params[2:]
 
                 class_derived = params[1]
-                
+
                 # Agrega la clase
                 try:
                     self.add(class_base, class_derived, methods)
@@ -47,7 +48,7 @@ class VTable:
         # Verica que la clase base exista (si aplica)
         if class_base != None and class_base not in self.vtables.keys():
             raise Exception("La clase base no existe")
-        
+
         # Verifica que la clase derivada no sea la clase base
         if class_base == class_derived:
             raise Exception("La clase derivada y la clase base son la misma")
@@ -59,7 +60,6 @@ class VTable:
         # Verifica que todos los metodos dados son distintos
         if len(methods) != len(set(methods)):
             raise Exception("Los metodos no son distintos")
-
 
         # Crea la tabla de metodos virtuales
         self.vtables[class_derived] = {}
@@ -78,7 +78,9 @@ class VTable:
                 for method in self.vtables[curr_class].keys():
                     # Verifica que el metodo no haya sido definido en la clase
                     if method not in self.vtables[class_derived].keys():
-                        self.vtables[class_derived][method] = self.vtables[curr_class][method]
+                        self.vtables[class_derived][method] = self.vtables[curr_class][
+                            method
+                        ]
                 # Continua con la clase base
                 curr_class = self.inherit_hier[curr_class]
 
@@ -87,26 +89,19 @@ class VTable:
     def describe(self, class_name):
         if class_name not in self.vtables.keys():
             raise Exception("La clase no existe")
-        
-        for (method, class_def) in self.vtables[class_name].items():
+
+        for method, class_def in self.vtables[class_name].items():
             print(f" {method} -> {class_def} :: {method}")
 
 
 # Ejejmplo
-#vtable = VTable()
-#vtable.add(None, "A", ["foo", "baz"])
-#vtable.add("A", "B", ["foo"])
-#vtable.add("B", "C", ["bar"])
+# vtable = VTable()
+# vtable.add(None, "A", ["foo", "baz"])
+# vtable.add("A", "B", ["foo"])
+# vtable.add("B", "C", ["bar"])
 #
-#print(vtable.vtables)
+# print(vtable.vtables)
 
 if __name__ == "__main__":
     vtable = VTable()
     vtable.run_simulation()
-
-
-
-
-
-
-
