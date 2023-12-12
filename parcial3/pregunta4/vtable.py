@@ -76,19 +76,6 @@ class VTable:
                         method
                     ]
 
-        # Copia los metodos de la clase base y de sus clases base (si aplica)
-        #if class_base != None:
-        #    curr_class = class_base
-        #    while curr_class != None:
-        #        for method in self.vtables[curr_class].keys():
-        #            # Verifica que el metodo no haya sido definido en la clase
-        #            if method not in self.vtables[class_derived].keys():
-        #                self.vtables[class_derived][method] = self.vtables[curr_class][
-        #                    method
-        #                ]
-        #        # Continua con la clase base
-        #        curr_class = self.inherit_hier[curr_class]
-
         print(f"La tabla de metodos virtuales de {class_derived} fue creada con exito")
 
     def describe(self, class_name):
