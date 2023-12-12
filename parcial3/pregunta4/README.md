@@ -49,14 +49,12 @@ Ejemplos:
 
 ## Ejecutar Pruebas con Cobertura
 
-El proyecto incluye un conjunto de pruebas para verificar el correcto funcionamiento del manejador. Para ejecutarlas, ejecute el siguiente comando:
-
+El proyecto incluye un conjunto de pruebas para verificar el correcto funcionamiento del manejador. Para ejecutarlas, use el siguiente comando:
     ```bash
     coverage run -m test_vtable
     ```
 
 Para generar un reporte de cobertura, ejecute el siguiente comando:
-
     ```bash
     coverage report -m
     ```
