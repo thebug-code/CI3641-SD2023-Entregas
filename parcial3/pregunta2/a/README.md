@@ -1,5 +1,5 @@
 # Producto punto entre dos arreglos
-Programa en C que dado dos argumentos pasados por la línea de comandos, digamos, `N` y `T` calcula el producto escalar entre dos vectores generados aleatoriamente de `N` elementos enteros cada uno. El cálculo se realiza usando `T` hilos; cada hilo calcula un producto escalar parcial y luego estos se suman para obtener el resultado final, el cual se muestra en pantalla.
+Programa en C que dado dos argumentos pasados por la línea de comandos, digamos, `N` y `T`. calcula el producto escalar entre dos vectores generados aleatoriamente de `N` elementos enteros cada uno. El cálculo se realiza usando `T` hilos; cada hilo calcula un producto escalar parcial y luego estos se suman para obtener el resultado final, el cual se muestra en pantalla.
 
 ## Instalación
 1. Clona el repositorio:
@@ -14,9 +14,9 @@ Programa en C que dado dos argumentos pasados por la línea de comandos, digamos
     cd CI3641-SD2023-Entregas/parcial3/pregunta2
     ```    
 3. Compilar el programa
-```bash
-make
-```        
+    ```bash
+    make
+    ```        
 
 ## Uso     
 Para ejecutar el programa, utilice el siguiente comando:
