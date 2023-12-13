@@ -5,7 +5,7 @@
 #include <pthread.h>
 #include <unistd.h> 
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex;
 int file_count = 0;
 
 void *count_files(void *arg) {
@@ -60,17 +60,29 @@ void *count_files(void *arg) {
 }
 
 int main(int argc, char *argv[]) {
-    pthread_t tid;
-    void *status;
+    pthread_t tid; /* Identificador del hilo */
+    void *status; /* Estado devuelto por el hilo */
 
     if (argc != 2) {
         fprintf(stderr, "Uso: %s <path>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
     
+    /* Inicializa el mutex */
+    if (pthread_mutex_init(&mutex, NULL)) {
+        perror("pthread_mutex_init");
+        exit(EXIT_FAILURE);
+    }
 
     pthread_create(&tid, NULL, count_files, (void *) argv[1]);
     pthread_join(tid, &status);
+    
+    /* Destruye el mutex */
+    if (pthread_mutex_destroy(&mutex)) {
+        perror("pthread_mutex_destroy");
+        exit(EXIT_FAILURE);
+    }
+
     printf("Numero total de archivos %d\n", file_count);
 
     return 0;
